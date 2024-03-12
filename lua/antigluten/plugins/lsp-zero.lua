@@ -1,0 +1,120 @@
+return {}
+-- return {
+--     'VonHeikemen/lsp-zero.nvim',
+--     branch = 'v3.x',
+--     dependencies = {
+--         'williamboman/mason.nvim',
+--         'williamboman/mason-lspconfig.nvim',
+-- 
+--         -- LSP Support
+--         'neovim/nvim-lspconfig',
+--         -- Autocompletion
+--         'hrsh7th/nvim-cmp',
+--         'hrsh7th/cmp-nvim-lsp',
+--         'L3MON4D3/LuaSnip',
+--     },
+--     config = function()
+--         local status, lsp = pcall(require, 'lsp-zero')
+-- 
+--         if not status then
+--             print 'not found lsp-zero installed'
+--             return
+--         end
+-- 
+--         lsp.preset('recommended')
+-- 
+--         require('mason').setup({})
+--         require('mason-lspconfig').setup({
+--             ensure_installed = {},
+--             handlers = {
+--                 lsp.default_setup, lua_ls = function()
+--                     local lua_opts = lsp.nvim_lua_ls()
+--                     local lspconfig = require('lspconfig')
+--                     lspconfig.lua_ls.setup(lua_opts)
+-- 
+--                     local util = require("lspconfig.util")
+--                     local cmp_nvim_lsp = require("cmp_nvim_lsp")
+--                     local capabilities = cmp_nvim_lsp.default_capabilities()
+--                     local opts = { noremap = true, silent = true }
+--                     local on_attach = function(_, bufnr)
+--                         opts.buffer = bufnr
+--                         opts.desc = "Show line diagnostics"
+--                         vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+-- 
+--                         opts.desc = "Show documentation for what is under cursor"
+--                         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+--                     end
+-- 
+--                     lspconfig["sourcekit"].setup({
+--                         capabilities = capabilities,
+--                         on_attach = on_attach,
+--                         cmd = {
+--                             "/Applications/Xcode-15.2.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+--                         },
+--                         root_dir = function(filename, _)
+--                             return util.root_pattern("buildServer.json")(filename)
+--                                 or util.root_pattern("*.xcodeproj", "*.xcworkspace")(filename)
+--                                 or util.find_git_ancestor(filename)
+--                                 or util.root_pattern("Package.swift")(filename)
+--                         end,
+--                     })
+--                 end,
+--             }
+--         })
+-- 
+--         local cmp = require('cmp')
+--         local cmp_select = { behavior = cmp.SelectBehavior.Select }
+-- 
+--         local lspkind = require("lspkind")
+-- 
+--         cmp.setup({
+--             completion = {
+--                 compelteopt = "menu,menuone,preview"
+--             },
+--             -- snippet = {
+--             --     expand = function(args)
+--             --         luasnip.lsp_expand(args.body)
+--             --     end
+--             -- }
+--             sources = {
+--                 {name = 'path'},
+--                 {name = 'nvim_lsp'},
+--                 {name = 'nvim_lua'},
+--                 {name = 'luasnip', keyword_length = 2},
+--                 {name = 'buffer', keyword_length = 3},
+--             },
+--             -- formatting = lsp.cmp_format(),
+--             formatting = {
+--                 format = lspkind.cmp_format({
+--                     maxwidth = 50,
+--                     ellipsis_char = "..."
+--                 }),
+--             },
+--             mapping = cmp.mapping.preset.insert({
+--                 ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+--                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+--                 ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+--                 ['<C-Space>'] = cmp.mapping.complete(),
+--                 ['<C-e>'] = cmp.mapping.abort(),
+--             }),
+--         })
+-- 
+--         lsp.on_attach(function(_, bufnr)
+--             local opts = { buffer = bufnr, remap = false }
+-- 
+--             vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+--             vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+--             vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+--             vim.keymap.set("n", "<leader>vd", function() vim.diagnostics.open_float() end, opts)
+--             vim.keymap.set("n", "<leader>[d", function() vim.diagnostics.goto_next() end, opts)
+--             vim.keymap.set("n", "<leader>]d", function() vim.diagnostics.goto_prev() end, opts)
+-- 
+--             vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
+--             vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
+--             vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+--             vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+--         end)
+-- 
+--         lsp.setup()
+--     end,
+-- }
