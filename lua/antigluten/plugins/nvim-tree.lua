@@ -1,7 +1,7 @@
 return {
     'nvim-tree/nvim-tree.lua',
     dependencies = {
-        'nvim-tree/nvim-web-devicons', -- optional
+        'nvim-tree/nvim-web-devicons',
     },
     config = function ()
         local function my_on_attach(bufnr)
@@ -26,13 +26,23 @@ return {
                 sorter = "case_sensitive",
             },
             view = {
-                width = 30,
+                side = "right",
+                width = 50,
+                number = false,
+                float = {
+                    enable = false,
+                },
             },
             renderer = {
                 group_empty = true,
+                highlight_git = "none", -- "name"
+                indent_markers = {
+                    enable = true,
+                    inline_arrows = false,
+                }
             },
             filters = {
-                dotfiles = true,
+                dotfiles = false,
             },
         })
     end

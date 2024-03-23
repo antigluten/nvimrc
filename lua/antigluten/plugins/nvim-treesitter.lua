@@ -22,7 +22,8 @@ return {
                 "vimdoc",
                 "nasm",
                 "swift",
-                "objc"
+                "objc",
+                "rust",
             },
             matchup = { enable = true, },
             highlight = { enable = true, },

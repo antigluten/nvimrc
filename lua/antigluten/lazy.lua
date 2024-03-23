@@ -11,16 +11,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-    { import = 'antigluten.plugins' },
---    install = {
---        colorscheme = { "gruvbox" },
---    },
---    checker = {
---        enabled = false,
---        notify = true,
---    },
---    change_detection = {
---        notify = true,
---    },
+require('lazy').setup({ { import = 'antigluten.plugins' }}, {
+    change_detection = {
+        notify = false,
+    },
 })
