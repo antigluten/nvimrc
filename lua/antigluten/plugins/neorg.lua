@@ -1,59 +1,73 @@
-return {
-    {
-        "vhyrro/luarocks.nvim",
-        priority = 1000,
-        config = true,
+local M = {
+    "nvim-neorg/neorg",
+    version = "v7.0.0",
+    lazy = false,
+    after = { "plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+    dependencies = {
+        "plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
     },
-    {
-        -- Latest stable release is v7.0.0
-        -- To use it, we should provide version with `version`
-        -- If I wanna use my customized Neorg,
-        -- I have to provide dir path
-        -- `~/Developer/lua/plugins/neorg`
-        -- 
-        -- Neorg has migrated to luarocks
-        -- 
-        -- >= v8.0.0 doesn't use build setting
-        -- `build = ":Neorg sync-parsers"`
-        "nvim-neorg/neorg",
-        version = "*",
-        lazy = false,
-        dependencies = {
-            "luarocks.nvim"
+    build = ":Neorg sync-parsers",
+    ft = "norg",
+}
+
+local modules = {
+    ["core.defaults"] = {},
+    ["core.concealer"] = {
+        config = {
+            icon_preset = "diamond"
         },
-        ft = "norg",
-        config = function()
-            require('neorg').setup {
-                load = {
-                    ["core.defaults"] = {},
-                    ["core.concealer"] = {
-                        config = {
-                            icon_preset = "diamond"
-                        },
-                    },
-                    ["core.dirman"] = {
-                        config = {
-                            workspaces = {
-                                notes = "~/notes",
-                            },
-                            use_popup = false,
-                            inject_metadata = true
-                        },
-                    },
-                    ["core.keybinds"] = {
-                        config = {
-                            hook = function (keybinds)
-                                keybinds.remap_event("norg", "n", "<C-n>", "core.dirman.new.note")
-                            end,
-                        }
-                    },
-                    ["core.esupports.metagen"] = {
-                        config = {
-                            author = "Vladimir Gusev",
-                        },
-                    },
-                },
-            }
-        end,
-    }
+    },
+    ["core.dirman"] = {
+        config = {
+            workspaces = {
+                notes = "~/notes",
+            },
+            index = "workspace.norg",
+            use_popup = false,
+            inject_metadata = true
+        },
+    },
+    ["core.keybinds"] = {
+        config = {
+            hook = function (keybinds)
+                keybinds.remap_event("norg", "n", "<C-n>", "core.dirman.new.note")
+            end,
+        }
+    },
+    ["core.presenter"] = {
+        config = {
+            zen_mode = "zen-mode",
+        },
+    },
+    ["core.esupports.metagen"] = {
+        config = {
+            type = "auto",
+            update_date = true,
+            author = "Vladimir Gusev",
+        },
+    },
+    ["core.qol.toc"] = {},
+    ["core.qol.todo_items"] = {},
+    ["core.looking-glass"] = {},
+    ["core.export"] = {},
+    ["core.export.markdown"] = { config = { extensions = "all" } },
+    ["core.summary"] = {},
+    ["core.tangle"] = { config = { report_on_empty = false } },
+    ["core.ui.calendar"] = {},
+    ["core.journal"] = {},
+}
+
+M.opts = {
+    load = modules,
+}
+
+
+return {
+    -- {
+    --     "vhyrro/luarocks.nvim",
+    --     priority = 1000,
+    --     config = true,
+    -- },
+    M,
 }
