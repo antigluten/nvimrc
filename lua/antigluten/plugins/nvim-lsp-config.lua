@@ -15,6 +15,7 @@ local create_configurations = function(capabilities, on_attach)
         on_attach = on_attach,
         cmd = {
             "/Applications/Xcode-15.3.0.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
+            "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp",
         },
         root_dir = function(filename, _)
             local util = require("lspconfig.util")

@@ -7,3 +7,5 @@ vim.keymap.set('n', '<leader>ff', ':NvimTreeFindFile<CR>', {noremap = true})
 vim.keymap.set('n', '<leader>zm', ':ZenMode<CR>', {noremap=true})
 
 vim.api.nvim_set_keymap("i", "jk", "<Esc>", {noremap=false})
+
+vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
