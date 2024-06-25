@@ -6,19 +6,6 @@ return {
     'philj56/vim-asm-indent',
     'dstein64/vim-startuptime',
     {
-        dir = "~/Developer/lua/plugins/antigluten.nvim",
-        config = function()
-            require('plugin').setup {
-                ["core"] = {
-
-                },
-                ["ui"] = {
-                    float = false,
-                },
-            }
-        end,
-    },
-    {
         'Wansmer/langmapper.nvim',
         lazy = false,
         priority = 1, -- High priority is needed if you will use `autoremap()`
