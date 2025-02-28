@@ -1,0 +1,7 @@
+{
+    "linking": {
+        "prefix": "link",
+        "body": ["-link[$1]{$2}"],
+        "description": ""
+    }
+}
